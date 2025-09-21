@@ -95,8 +95,7 @@ If you require access to the original training samples, please contact the autho
 ## Reproducibility
 To ensure reproducibility:
 - Code has been tested with Python 3.12.  
-- Dependencies are specified in `requirements.txt`.  
-- Random seeds can be set in the scripts for deterministic results.  
+- Dependencies are specified in `requirements.txt`.   
 
 ---
 
@@ -118,4 +117,5 @@ This project is licensed under the MIT License – see the [LICENSE](LICENSE) fi
 For questions or collaboration, please contact:  
 **Zhenggao Wu, Qi-Ming He**  
 Email: z365wu@uwaterloo.ca, q7he@uwaterloo.ca
+
 Affiliation: Department of Management Science and Engineering, University of Waterloo

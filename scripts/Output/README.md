@@ -1,1 +1,1 @@
-## The directory includes outputs, including figures, tables, models, for discrete/continuous/mixed queues
+## The directory includes outputs, including figures, tables, and models, for discrete/continuous/mixed queues

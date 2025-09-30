@@ -17,7 +17,7 @@ env/
 .vscode/
 
 # Ignore outputs
-Output/Figures/
-Output/Tables/
-Output/samples/
-Output/models/
+scripts/Output/Figures/
+scripts/Output/Tables/
+scripts/Output/samples/
+scripts/Output/models/

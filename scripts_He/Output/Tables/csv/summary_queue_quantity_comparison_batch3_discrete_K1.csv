@@ -1,4 +1,0 @@
-rho,epoch,K,DNN_SAE_min,Simul_SAE_min,DNN_SAE_avg,Simul_SAE_avg,DNN_SAE_max,Simul_SAE_max
-0.27,1,1,0.54,0.007,0.54,0.009,0.54,0.01
-0.66,1,1,1.32,0.029,1.32,0.037,1.32,0.043
-0.95,1,1,1.9,0.261,1.9,0.353,1.9,0.433

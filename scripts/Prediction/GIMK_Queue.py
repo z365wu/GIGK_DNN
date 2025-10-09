@@ -90,7 +90,7 @@ def Simulation_StatDist_CT(K, a, b, mu, Lmax):
     
     Qmax = Lmax + 1 # use a larger Qmax (Qmax > Lmax)  to avoid issues caused by heavy tails (when \rho is close to 1) 
     t_q = np.zeros(Qmax)  # To record the total time spent in which of the queue length is 0, 1, ..., Qmax
-    Nmax = 200000  # The total number of events to be generated
+    Nmax = 20000000  # The total number of events to be generated
     v = np.ones(K+1) * 1.e15  # The residual times of services and the interarrival time: v[K] for the interarrival times
                               # v[0], v[1], ..., v[K-1] are the residual times of servers 1, 2, ..., K
     n = 0   # Number of events generated

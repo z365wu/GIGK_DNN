@@ -386,7 +386,7 @@ def df_to_latex_GIMK(df):
         latex.append(r'\hline')
 
     latex.append(r'\end{tabular}')
-    latex.append(r'\label{tab:Stationary_Distribution}')
+    latex.append(r'\label{tab:Stationary_Distribution_GIMK}')
     latex.append(r'\end{table}')
 
     return '\n'.join(latex)

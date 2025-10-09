@@ -1,0 +1,14 @@
+\begin{table}[H]
+\centering
+\tiny
+\caption{Queueing quantity comparison for $K = 2$; mixed queues; $DNN_{(C)}^{(2)}$}
+\begin{tabular}{c|ccc|ccc|ccc}
+\hline
+     & \multicolumn{3}{c|}{SAE$\_$min} & \multicolumn{3}{c|}{SAE$\_$avg} & \multicolumn{3}{c}{SAE$\_$max} \\ \hline
+    $\rho$ & DNN & Simul & S(2025) & DNN & Simul & S(2025) & DNN & Simul & S(2025) \\ \hline
+	0.27   &   0.016   &   0.005   &   0.000   &   0.033   &   0.009   &   0.000   &   0.045   &   0.015   &   0.000   \\ \hline
+	0.66   &   0.040   &   0.027   &   0.000   &   0.091   &   0.036   &   0.000   &   0.121   &   0.040   &   0.000   \\ \hline
+	0.95   &   0.116   &   0.216   &   0.000   &   0.195   &   0.294   &   0.000   &   0.236   &   0.437   &   0.000   \\ \hline
+\end{tabular}
+\label{tab:Queueing_Quantity_batch_Comparison_K_2, mixed}
+\end{table}

@@ -1,0 +1,14 @@
+\begin{table}[H]
+\centering
+\tiny
+\caption{Queueing quantity comparison for $K = 1$; discrete queues; $DNN_{(C)}^{(1)}$}
+\begin{tabular}{c|ccc|ccc|ccc}
+\hline
+     & \multicolumn{3}{c|}{SAE$\_$min} & \multicolumn{3}{c|}{SAE$\_$avg} & \multicolumn{3}{c}{SAE$\_$max} \\ \hline
+    $\rho$ & DNN & Simul & S(2025) & DNN & Simul & S(2025) & DNN & Simul & S(2025) \\ \hline
+	0.27   &   0.540   &   0.008   &   0.000   &   0.540   &   0.010   &   0.000   &   0.540   &   0.012   &   0.000   \\ \hline
+	0.66   &   1.320   &   0.031   &   0.000   &   1.320   &   0.052   &   0.000   &   1.320   &   0.085   &   0.000   \\ \hline
+	0.95   &   1.900   &   0.209   &   0.000   &   1.900   &   0.247   &   0.000   &   1.900   &   0.266   &   0.000   \\ \hline
+\end{tabular}
+\label{tab:Queueing_Quantity_batch_Comparison_K_1, discrete}
+\end{table}

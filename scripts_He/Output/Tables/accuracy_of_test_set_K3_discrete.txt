@@ -1,0 +1,23 @@
+\begin{table}[h]
+\centering
+\caption{Accuracy of Test Set: Discrete, $K$ = 3}
+\begin{tabular}{lrrrrrr}
+\hline
+Number & SAE\_avg & SAE\_min & SAE\_max & REM\_avg & REM\_min & REM\_max \\
+\hline
+
+1 & 1.419384 & 0.048939 & 1.987965 & inf & inf & inf \\
+2 & 1.451125 & 0.137290 & 1.986342 & inf & inf & inf \\
+3 & 1.261359 & 0.015378 & 1.992387 & inf & inf & inf \\
+4 & 1.527152 & 0.176476 & 1.987444 & inf & inf & inf \\
+5 & 1.375128 & 0.103867 & 1.993845 & inf & inf & inf \\
+6 & 1.470444 & 0.427697 & 1.991600 & inf & inf & inf \\
+7 & 1.323955 & 0.060222 & 1.987464 & inf & inf & inf \\
+8 & 1.318295 & 0.127614 & 1.978299 & inf & inf & inf \\
+9 & 1.549351 & 0.425648 & 1.993420 & inf & inf & inf \\
+10 & 1.398750 & 0.250786 & 1.979120 & inf & inf & inf \\
+
+\hline
+\end{tabular}
+\label{tab:error_metrics_discrete_K_3}
+\end{table}

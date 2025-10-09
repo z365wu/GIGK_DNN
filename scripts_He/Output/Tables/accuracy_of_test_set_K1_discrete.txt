@@ -1,0 +1,23 @@
+\begin{table}[h]
+\centering
+\caption{Accuracy of Test Set: Discrete, $K$ = 1}
+\begin{tabular}{lrrrrrr}
+\hline
+Number & SAE\_avg & SAE\_min & SAE\_max & REM\_avg & REM\_min & REM\_max \\
+\hline
+
+1 & 1.134516 & 0.066693 & 1.957998 & inf & inf & inf \\
+2 & 1.239370 & 0.120983 & 1.974406 & inf & inf & inf \\
+3 & 1.117525 & 0.028685 & 1.956564 & inf & inf & inf \\
+4 & 1.067183 & 0.015525 & 1.972092 & inf & inf & inf \\
+5 & 0.842558 & 0.060197 & 1.867751 & inf & inf & inf \\
+6 & 1.059997 & 0.013147 & 1.950501 & inf & inf & inf \\
+7 & 0.989110 & 0.012197 & 1.943678 & inf & inf & inf \\
+8 & 1.040019 & 0.055599 & 1.922180 & inf & inf & inf \\
+9 & 0.928274 & 0.010168 & 1.966560 & inf & inf & inf \\
+10 & 0.989748 & 0.092146 & 1.977225 & inf & inf & inf \\
+
+\hline
+\end{tabular}
+\label{tab:error_metrics_discrete_K_1}
+\end{table}

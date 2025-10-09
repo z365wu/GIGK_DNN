@@ -1,0 +1,14 @@
+\begin{table}[H]
+\centering
+\tiny
+\caption{Queueing quantity comparison for $K = 1$; continuous queues; $DNN_{(C)}^{(1)}$}
+\begin{tabular}{c|cccc|cccc|cccc}
+\hline
+     & \multicolumn{4}{c|}{SAE$\_$min} & \multicolumn{4}{c|}{SAE$\_$avg} & \multicolumn{4}{c}{SAE$\_$max} \\ \hline
+    $\rho$ & DNN & Simul & S(2025) & B(2024) & DNN & Simul & S(2025) & B(2024) & DNN & Simul & S(2025) & B(2024) \\ \hline
+	0.27   &   0.540   &   0.001   &   0.010   &   0.004   &   0.540   &   0.009   &   0.012   &   0.028   &   0.540   &   0.024   &   0.013   &   0.070   \\ \hline
+	0.66   &   1.320   &   0.042   &   0.010   &   0.000   &   1.320   &   0.060   &   0.015   &   0.002   &   1.320   &   0.082   &   0.021   &   0.004   \\ \hline
+	0.95   &   1.900   &   0.140   &   0.091   &   0.001   &   1.900   &   0.275   &   0.198   &   0.005   &   1.900   &   0.382   &   0.380   &   0.012   \\ \hline
+\end{tabular}
+\label{tab:Queueing_Quantity_batch_Comparison_K_1, continuous}
+\end{table}

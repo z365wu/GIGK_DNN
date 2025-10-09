@@ -1,0 +1,37 @@
+\begin{table}[H]
+\centering
+\tiny
+\caption{Queueing Quantity Comparison for $K$ = 2; Queue Type: Mixed}
+\begin{tabular}{l|rrrrr}
+\hline
+ & \multicolumn{5}{c}{$\rho = 0.27$}  \\
+ & DNN & QBD & S(2025) & Simul & W(1993)  \\
+\hline
+
+$q_0$ & 0.582 & 0.572 & 0.572 & 0.570 & 0.585  \\
+$\mathbb{E}[q_w]$ & 0.019 & 0.025 & 0.027 & 0.025 & 0.030  \\
+$\mathbb{E}[W]$ & 0.036 & 0.047 & 0.050 & 0.047 & 0.056  \\
+
+\hline
+ & \multicolumn{5}{c}{$\rho = 0.66$}  \\
+ & DNN & QBD & S(2025) & Simul & W(1993)  \\
+\hline
+
+$q_0$ & 0.221 & 0.208 & 0.206 & 0.210 & 0.377  \\
+$\mathbb{E}[q_w]$ & 0.819 & 1.173 & 1.182 & 1.199 & 0.850  \\
+$\mathbb{E}[W]$ & 0.620 & 0.889 & 0.895 & 0.908 & 0.644  \\
+
+\hline
+ & \multicolumn{5}{c}{$\rho = 0.95$}  \\
+ & DNN & QBD & S(2025) & Simul & W(1993)  \\
+\hline
+
+$q_0$ & 0.027 & 0.025 & 0.026 & 0.030 & 0.462  \\
+$\mathbb{E}[q_w]$ & 14.714 & 14.509 & 13.758 & 10.904 & 7.689  \\
+$\mathbb{E}[W]$ & 7.744 & 7.636 & 7.241 & 5.739 & 4.047  \\
+
+\hline
+\end{tabular}
+\label{tab:Queueing_Quantity_Comparison_K_2, mixed}
+\end{table}
+

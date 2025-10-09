@@ -1,0 +1,37 @@
+\begin{table}[H]
+\centering
+\tiny
+\caption{Queueing Quantity Comparison for $K$ = 2; Queue Type: Continuous}
+\begin{tabular}{l|rrrrr}
+\hline
+ & \multicolumn{5}{c}{$\rho = 0.27$}  \\
+ & DNN & QBD & S(2025) & Simul & W(1993)  \\
+\hline
+
+$q_0$ & 0.522 & 0.518 & 0.519 & 0.515 & 0.566  \\
+$\mathbb{E}[q_w]$ & 0.004 & 0.003 & 0.005 & 0.003 & 0.010  \\
+$\mathbb{E}[W]$ & 0.008 & 0.006 & 0.008 & 0.006 & 0.018  \\
+
+\hline
+ & \multicolumn{5}{c}{$\rho = 0.66$}  \\
+ & DNN & QBD & S(2025) & Simul & W(1993)  \\
+\hline
+
+$q_0$ & 0.149 & 0.149 & 0.151 & 0.154 & 0.313  \\
+$\mathbb{E}[q_w]$ & 0.271 & 0.249 & 0.251 & 0.217 & 0.251  \\
+$\mathbb{E}[W]$ & 0.205 & 0.189 & 0.190 & 0.164 & 0.190  \\
+
+\hline
+ & \multicolumn{5}{c}{$\rho = 0.95$}  \\
+ & DNN & QBD & S(2025) & Simul & W(1993)  \\
+\hline
+
+$q_0$ & 0.022 & 0.019 & 0.020 & 0.022 & 0.438  \\
+$\mathbb{E}[q_w]$ & 7.658 & 8.484 & 8.224 & 7.804 & 4.605  \\
+$\mathbb{E}[W]$ & 4.031 & 4.465 & 4.329 & 4.107 & 2.424  \\
+
+\hline
+\end{tabular}
+\label{tab:Queueing_Quantity_Comparison_K_2, continuous}
+\end{table}
+

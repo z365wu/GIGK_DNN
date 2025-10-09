@@ -1,0 +1,37 @@
+\begin{table}[H]
+\centering
+\tiny
+\caption{Queueing Quantity Comparison for $K$ = 1; Queue Type: Continuous}
+\begin{tabular}{l|rrrrrr}
+\hline
+ & \multicolumn{6}{c}{$\rho = 0.27$}  \\
+ & B(2024) & DNN & QBD & S(2025) & Simul & W(1993)  \\
+\hline
+
+$q_0$ & 0.730 & 1.000 & 0.730 & 0.729 & 0.733 & 0.757  \\
+$\mathbb{E}[q_w]$ & 0.044 & 0.000 & 0.103 & 0.108 & 0.094 & 0.138  \\
+$\mathbb{E}[W]$ & 0.164 & 0.000 & 0.380 & 0.401 & 0.349 & 0.510  \\
+
+\hline
+ & \multicolumn{6}{c}{$\rho = 0.66$}  \\
+ & B(2024) & DNN & QBD & S(2025) & Simul & W(1993)  \\
+\hline
+
+$q_0$ & 0.340 & 1.000 & 0.340 & 0.336 & 0.352 & 0.542  \\
+$\mathbb{E}[q_w]$ & 1.773 & 0.000 & 1.775 & 1.802 & 1.732 & 1.178  \\
+$\mathbb{E}[W]$ & 2.686 & 0.000 & 2.689 & 2.730 & 2.624 & 1.785  \\
+
+\hline
+ & \multicolumn{6}{c}{$\rho = 0.95$}  \\
+ & B(2024) & DNN & QBD & S(2025) & Simul & W(1993)  \\
+\hline
+
+$q_0$ & 0.050 & 1.000 & 0.050 & 0.056 & 0.076 & 0.501  \\
+$\mathbb{E}[q_w]$ & 18.656 & 0.000 & 18.641 & 16.387 & 11.502 & 9.765  \\
+$\mathbb{E}[W]$ & 19.638 & 0.000 & 19.622 & 17.249 & 12.108 & 10.279  \\
+
+\hline
+\end{tabular}
+\label{tab:Queueing_Quantity_Comparison_K_1, continuous}
+\end{table}
+

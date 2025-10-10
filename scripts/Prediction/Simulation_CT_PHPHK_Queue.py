@@ -51,7 +51,7 @@ def Simulation_StatDist_CT(ma, alpha, T, ms, beta, S, K, Lmax):
     
     Qmax = Lmax + 1 # use a larger Qmax (Qmax > Lmax)  to avoid issues caused by heavy tails (when \rho is close to 1) 
     t_q = np.zeros(Qmax)  # To record the total time spent in which of the queue length is 0, 1, ..., Qmax
-    Nmax = 1000000  # The total number of events to be generated
+    Nmax = 10000  # The total number of events to be generated
     v = np.ones(K+1) * 1.e15  # The residual times of services and the interarrival time: v[K] for the interarrival times
                               # v[0], v[1], ..., v[K-1] are the residual times of servers 1, 2, ..., K
     n = 0   # Number of events generated
@@ -101,7 +101,7 @@ def Simulation_StatDist_CT(ma, alpha, T, ms, beta, S, K, Lmax):
     
 ####  Simulation of waiting time ##############
 def Simulation_WaitingTime_PHPHK(ma, alpha, T, ms, beta, S, K):
-    N_max = 1000000
+    N_max = 10000
     mean_waiting = 0
     Customers = np.ones([N_max, 2])   # N_max customers each with (arrival time, departure time)
     q_e = 0    ## the earliest cutomer in queue

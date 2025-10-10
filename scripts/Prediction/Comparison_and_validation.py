@@ -270,13 +270,16 @@ def df_quantity_Compare_to_latex(df, queue_type):
             if K == 1:
                 df_pivot = df_K.pivot(index="Quantity", columns="rho",
                                       values=["DNN", "QBD", "Simul", "S(2025)", "W(1993)", "B(2024)"])
+                value_order = ["DNN", "QBD", "Simul", "S(2025)", "W(1993)", "B(2024)"]
             else:
                 df_pivot = df_K.pivot(index="Quantity", columns="rho",
                                       values=["DNN", "QBD", "Simul", "S(2025)", "W(1993)"])
+                value_order = ["DNN", "QBD", "Simul", "S(2025)", "W(1993)"]
         else:
             df_pivot = df_K.pivot(index="Quantity", columns="rho",
                                   values=["DNN", "QBD", "Simul", "S(2025)", "W(1993)"])
-    
+            value_order = ["DNN", "QBD", "Simul", "S(2025)", "W(1993)"]
+            
         # Enforce row order
         quantity_order = ["$q_0$", "$\\mathbb{E}[q_w]$", "$\\mathbb{E}[W]$"]
         df_pivot = df_pivot.reindex(quantity_order)
@@ -288,7 +291,7 @@ def df_quantity_Compare_to_latex(df, queue_type):
         # but each column name still correctly corresponds to its column values.
         
         # Extract methods and rhos
-        methods = list(df_pivot.columns.levels[0])
+        methods = value_order
         rhos = list(df_pivot.columns.levels[1])
     
         # Start LaTeX table
@@ -300,11 +303,15 @@ def df_quantity_Compare_to_latex(df, queue_type):
             "\\begin{tabular}{l|" + "r" * len(methods) + "}\n"
             "\\hline\n"
         )
-    
+        print(methods)
         # Loop through each rho block
         for i, rho in enumerate(rhos):
             df_block = df_pivot.xs(rho, axis=1, level=1)
-    
+            
+            # Reorder columns according to value_order
+            df_block = df_block.reindex(columns=[c for c in value_order if c in df_block.columns])
+            print('block')
+            print(df_block)
             # Add rho header
             latex_table += f" & \\multicolumn{{{len(methods)}}}{{c}}{{$\\rho = {rho}$}}  \\\\\n"
             latex_table += " & " + " & ".join(methods) + "  \\\\\n"

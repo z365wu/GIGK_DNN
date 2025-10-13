@@ -62,25 +62,25 @@ pip install -r requirements.txt
 
 ### 1. Training
 ```bash
-python scripts_outputs/script_training.py
+python scripts/script_training.py
 ```
 
 ### 2. Prediction
 ```bash
-python scripts_outputs/script_prediction.py
+python scripts/script_prediction.py
 ```
 
 ### 3. Sampling
 ```bash
-python scripts_outputs/script_sampling.py
+python scripts/script_sampling.py
 ```
 
 ### 4. Full Workflow
 ```bash
-python scripts_outputs/script_main.py
+python scripts/script_main.py
 ```
 
-Generated outputs will be stored under `.scripts_outputs/Output/`.
+Generated outputs will be stored under `.scripts/Output/`.
 
 ---
 

@@ -84,12 +84,12 @@ if __name__ == '__main__':
         m_max = 15              # The maximum order of PH-representation (alpha, T)
         input_dim = 2*n_max     # DNN input dimension: arrival n_max + service n_max
         
-        # # generate samples for continuous and discrete queues
-        # if queue_type in ['continuous', 'discrete']:
-        #     sample_generation(queue_type, n_max, Lmax, m_max, sample_size=6, file_save_name='sample_test_Sept_25_2025')
+        # generate samples for continuous and discrete queues
+        if queue_type in ['continuous', 'discrete']:
+            sample_generation(queue_type, n_max, Lmax, m_max, sample_size=6, file_save_name='sample_test_Sept_25_2025')
         
-        # # train a DNN model
-        # training_DNN(queue_type, n_max, Lmax, m_max)
+        # train a DNN model
+        training_DNN(queue_type, n_max, Lmax, m_max)
         
         # prediction based on the trained DNN models
         Prediction(queue_type, n_max, Lmax, m_max, rho=0.27) # rho: traffic intensity

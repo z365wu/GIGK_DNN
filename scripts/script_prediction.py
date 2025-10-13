@@ -346,7 +346,7 @@ def df_to_latex_GIMK(df):
     latex.append(r'\begin{table}[H]')
     latex.append(r'\centering')
     latex.append(r'\tiny')
-    latex.append(r'\caption{Stationary distribution results by $K$ and $\rho$}')
+    latex.append(r'\caption{Mean Queue Lengths by $K$ and $\rho$}')
     latex.append(r'\begin{tabular}{c|c|' + 'c' * len(cols) + '}')
     latex.append(r'\hline')
     latex.append(r' &  & ' + ' & '.join(cols) + r' \\')  # Empty header for rho
@@ -386,7 +386,7 @@ def df_to_latex_GIMK(df):
         latex.append(r'\hline')
 
     latex.append(r'\end{tabular}')
-    latex.append(r'\label{tab:Stationary_Distribution_GIMK}')
+    latex.append(r'\label{tab:Mean_Queue_Length_GIMK}')
     latex.append(r'\end{table}')
 
     return '\n'.join(latex)

@@ -101,16 +101,16 @@ if __name__ == '__main__':
         ## Class initilization for sample generation: Used by all parts in this file (Keep it) ###
         NN_sample1 = PHPHK_sample_generation(queue_type = queue_type, n_max = n_max, Lmax = Lmax, m_max = m_max)
         
-        # Part I: Generate samples for all
+        # # Part I: Generate samples for all
         Generate_samples_for_all(NN_sample1, sample_size)
         
-        # # Part II: Generate pdfs of PH-samples (for Section 3.4.2)
-        # if queue_type =='continuous':
-        #     num_new_sample = 15 # numbers of new samples
-        #     Generate_pdfs_of_PH_samples(NN_sample1, num_new_sample)
+        # Part II: Generate pdfs of PH-samples (for Section 3.4.2)
+        if queue_type =='continuous':
+            num_new_sample = 15 # numbers of new samples
+            Generate_pdfs_of_PH_samples(NN_sample1, num_new_sample)
         
-        # # Part III: Plot the distribution of rho for the samples (for Section 3.4.3)
-        # Plot_distribution_of_rho(NN_sample1)
+        ## Part III: Plot the distribution of rho for the samples (for Section 3.4.3)
+        Plot_distribution_of_rho(NN_sample1)
         
-        # Part IV: Plot SCV and its (convex) hull (for Section 3.4.4)
-        # Plot_SCV_convex_hull(NN_sample1)
+        ## Part IV: Plot SCV and its (convex) hull (for Section 3.4.4)
+        Plot_SCV_convex_hull(NN_sample1)

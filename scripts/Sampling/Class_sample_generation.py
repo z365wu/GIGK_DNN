@@ -117,9 +117,9 @@ class PHPHK_sample_generation:   # BOTH continuous and discrete
         
         # Adding labels and title
         if self.queue_type == 'continuous':
-            plt.title(f'SCV in Inter-arrival vs. Service Times: {self.queue_type} queue', fontsize=14)
-        plt.xlabel('SCV of Inter-arrival Times', fontsize=14)
-        plt.ylabel('SCV of Service Times', fontsize=14)
+            plt.title(f'SCV in inter-arrival vs. service times: {self.queue_type} time queue', fontsize=14)
+        plt.xlabel('SCV of inter-arrival times', fontsize=14)
+        plt.ylabel('SCV of service times', fontsize=14)
         
         # Set axis limits for continuous queues
         if str(self.queue_type) in ['1', 'continuous']:
@@ -191,9 +191,9 @@ class PHPHK_sample_generation:   # BOTH continuous and discrete
         for simplex in hull.simplices:
             plt.plot(filtered_points095[simplex, 0], filtered_points095[simplex, 1], 'r-')
 
-        plt.title(f'$SCV$ in Inter-arrival vs. Service Times: {self.queue_type} queue', fontsize=14)
-        plt.xlabel('$SCV$ of Inter-arrival Time', fontsize=14)
-        plt.ylabel('$SCV$ of Service Time', fontsize=14)
+        plt.title(f'$SCV$ in inter-arrival vs. service times: {self.queue_type} queue', fontsize=14)
+        plt.xlabel('$SCV$ of inter-arrival time', fontsize=14)
+        plt.ylabel('$SCV$ of service time', fontsize=14)
         # Set axis limits for continuous queues
         if str(self.queue_type) in ['1', 'continuous']:
             plt.xlim(0, 60)

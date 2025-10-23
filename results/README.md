@@ -1,1 +1,1 @@
-TBD
+All Figures and Tables can be found in `scripts/Output/`.

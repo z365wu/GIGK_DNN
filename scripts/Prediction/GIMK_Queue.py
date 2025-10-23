@@ -79,7 +79,7 @@ def GIMK_Queues(K, a, b, mu, Lmax):
     p01 = 1 - rho
     for i in range (1, K):
         p01 -= K*rho*vec_pi[i-1]*(1/i - 1/K)
-    print('p0 = ', p0, 'p01 = ', p01)
+    # print('p0 = ', p0, 'p01 = ', p01)
     
     return vec_p, p0, Eq 
 
@@ -140,7 +140,7 @@ def Simulation_StatDist_CT(K, a, b, mu, Lmax):
     for i in range (Lmax):
         Eq = Eq + i*p_d[i]
     
-    return p_d, Eq, p0
+    return p_d, p0, Eq
 
 
 if __name__ == '__main__':

@@ -60,85 +60,7 @@ def DNN_validation(DNN_net):
             f.write(df_accuracy_latex_table)
     
     # # Save overall loss and accuracy results
-    df_loss_accuracy.to_csv(f'Output/Tables/csv/Validation_loss_accuracy_{DNN_net.queue_type}.csv')
-
-
-def Table_DNN_training_accuracy_loss(mode):
-    """
-    Generate a LaTeX table summarizing DNN accuracy and loss results.
-    
-    Parameters
-    ----------
-    mode : str
-        'train' to summarize training accuracy/loss across K and q_type;
-        'validation' to summarize validation accuracy/loss.
-    
-    Output
-    ------
-    Writes a .txt file with LaTeX table in Output/Tables/.
-    Prints the LaTeX table to console.
-    """
-    
-    df_all = pd.DataFrame()
-    if mode == 'train':
-        for queue_type in ['continuous', 'discrete', 'mixed']:
-            for K in [1, 2, 3]:
-                df_sub = pd.read_csv(f'Output/models/training_history_GIGK({str(K)})_{queue_type}.csv')
-                df_sub = df_sub.loc[[df_sub['epoch'].idxmax()]]
-                df_sub['q_type'] = queue_type
-                df_all = pd.concat([df_all,df_sub], axis = 0, ignore_index=True)
-    elif mode == 'validation':
-        for queue_type in ['continuous', 'discrete', 'mixed']:
-            df_sub = pd.read_csv(f'Output/Tables/csv/Validation_loss_accuracy_{queue_type}.csv')
-            df_sub['q_type'] = queue_type
-            df_sub = df_sub.rename(columns={'accuracy': 'accuracy_fn'})
-            df_all = pd.concat([df_all,df_sub], axis=0, ignore_index=True)
-
-    # Pivot the DataFrame
-    table = df_all.pivot(index="K", columns="q_type", values=["accuracy_fn", "loss"])
-    
-    # Build LaTeX manually (no booktabs)
-    latex_str = "\\begin{table}[H]\n"
-    latex_str += "\\centering\n"
-    if mode == 'train':
-        latex_str += "\\caption{Training Accuracy and Loss for $DNN_{(C)}^{(K)}$, $DNN_{(D)}^{(K)}$, and $DNN_{(M)}^{(K)}$, for $K=1, 2, 3$.}\n"
-    elif mode == 'validation':
-        latex_str += "\\caption{Validation Accuracy and Loss for $DNN_{(C)}^{(K)}$, $DNN_{(D)}^{(K)}$, and $DNN_{(M)}^{(K)}$, for $K=1, 2, 3$.}\n"
-    
-    latex_str += "\\begin{tabular}{|c|c|c|c|c|c|c|}\n"
-    latex_str += "\\hline\n"
-    latex_str += " & \\multicolumn{2}{c|}{$DNN_{(C)}^{(K)}$} & \\multicolumn{2}{c|}{$DNN_{(D)}^{(K)}$} & \\multicolumn{2}{c|}{$DNN_{(M)}^{(K)}$} \\\\\n"
-    latex_str += "\\hline\n"
-    latex_str += "$K$ & Accuracy & Loss & Accuracy & Loss & Accuracy & Loss \\\\\n"
-    latex_str += "\\hline\n"
-    
-    # Fill table rows
-    for k in table.index:
-        row = [
-            f"{k}",
-            f"{table.loc[k, ('accuracy_fn', 'continuous')]:.5f}", f"{table.loc[k, ('loss', 'continuous')]:.5f}",
-            f"{table.loc[k, ('accuracy_fn', 'discrete')]:.5f}",   f"{table.loc[k, ('loss', 'discrete')]:.5f}",
-            f"{table.loc[k, ('accuracy_fn', 'mixed')]:.5f}",      f"{table.loc[k, ('loss', 'mixed')]:.5f}",
-        ]
-        latex_str += " & ".join(row) + " \\\\\n\\hline\n"
-    
-    latex_str += "\\end{tabular}\n"
-    if mode == 'train':
-        latex_str += "\\label{tb: Training errors and accuracy for all nine cases}\n"
-    elif mode == 'validation':
-        latex_str += "\\label{tb: Validation errors and accuracy for all DNNs}\n"
-    
-    latex_str += "\\end{table}"
-    
-    if mode == 'train':
-        file_name = 'Output/Tables/DNN_training_accuracy_and_loss.txt'
-    elif mode == 'validation':
-        file_name = 'Output/Tables/DNN_validation_accuracy_and_loss.txt'
-        
-    with open(file_name, "w", encoding="utf-8") as f:
-        f.write(latex_str)
-    
-    print(latex_str)
+    df_loss_accuracy.to_csv(f'Output/Tables/csv/Validation_lossa_accuracy_{DNN_net.queue_type}.csv')
 
 
 if __name__ == '__main__':
@@ -167,9 +89,3 @@ if __name__ == '__main__':
         
         # Part II: DNN validation for (Section 4.4)
         DNN_validation(DNN_net)
-        
-    # Generate LaTeX table for training accuracy and loss
-    Table_DNN_training_accuracy_loss(mode='train')
-    
-    # Generate LaTeX table for validation accuracy and loss
-    Table_DNN_training_accuracy_loss(mode='validation')

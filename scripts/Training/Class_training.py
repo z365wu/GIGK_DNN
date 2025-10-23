@@ -272,8 +272,8 @@ class NN_for_Queue:
             acc_col = [col for col in df_k.columns if 'accuracy' in col][0]  # Auto-detect accuracy column
             plt.plot(df_k['epoch'], df_k[acc_col], marker='o', label=f'Accuracy (K={k_val})')
         plt.xlabel('Epoch', fontsize=14)
-        plt.ylabel('Bounded Accuracy', fontsize=14)
-        plt.title(f'Training Accuracy over Epochs for each $K$: {self.queue_type} queue', fontsize=14)
+        plt.ylabel('Bounded accuracy', fontsize=14)
+        plt.title(f'Training accuracy over epochs for each $K$: {self.queue_type} queue', fontsize=14)
         plt.legend()
         plt.grid(True)
         os.makedirs('Output/Figures/Training_accuracy_loss/', exist_ok=True)
@@ -281,7 +281,7 @@ class NN_for_Queue:
         plt.show()
     
     
-    def Validation_test_DNN(self, K, DNN_model, batch_size = 10):
+    def Validation_test_DNN(self, K, DNN_model, batch_size = 50):
         '''
         1. We use 20 percent of generated samples for validation test: mean loss and accuracy of DNN prediction 
         2. Numerical examples and error analysis: average, min, and max 
@@ -400,7 +400,7 @@ class NN_for_Queue:
         self.df_StatDist.iloc[0:N,].plot(kind='bar', figsize=(10, 6), rot=0)
         
         # Adding title and labels
-        plt.title(f'Queue Length Distribution: $K$={K}, $\\rho = {rho}$, {self.queue_type.capitalize()} Queue', fontsize=14)
+        plt.title(f'Queue length distribution: $K$={K}, $\\rho = {rho}$, {self.queue_type.capitalize()} queue', fontsize=14)
         plt.xlabel('Queue length', fontsize=14)
         plt.ylabel('Probability', fontsize=14)
         # Rotating x-axis labels for better visibility

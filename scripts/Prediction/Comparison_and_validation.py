@@ -165,7 +165,7 @@ def Compare_StatDist(queue_type, K, m_max, n_max, Lmax, NN_model, rho_lower, rho
 def Compare_Queue_quantity(df_StatDist, Lmax, K, rho, queue_type):
     ### compare the mean and variance of QBD, NN, Simulation, Whitt1993, and Baron2024
     # Calculate the probability of the queue length being 0 (q = 0) using the four methods
-    origin_queue_type = queue_type 
+    
     q_0_NN = round(float(df_StatDist['DNN'][0]),3)
     q_0_QBD = round(float(df_StatDist['QBD'][0]),3)
     q_0_Simu = round(float(df_StatDist['Simulation'][0]),3)
@@ -195,7 +195,7 @@ def Compare_Queue_quantity(df_StatDist, Lmax, K, rho, queue_type):
     # Compuate MSE base on QBD for NN, simulation, and Whitt1993
     mse_QBD_Simu = np.mean((df_StatDist['QBD'] - df_StatDist['Simulation']) ** 2).round(3)
     mse_QBD_NN = np.mean((df_StatDist['QBD'] - df_StatDist['DNN']) ** 2).round(3)
-    mse_QBD_Sherzer = np.mean((df_StatDist['S(2025)'] - df_StatDist['S(2025)']) ** 2).round(3)  
+    mse_QBD_Sherzer = np.mean((df_StatDist['QBD'] - df_StatDist['S(2025)']) ** 2).round(3)  
     mse_QBD_Whitt = np.mean((df_StatDist['QBD'] - df_StatDist['W(1993)']) ** 2).round(3)
     mse_QBD_QBD = np.mean((df_StatDist['QBD'] - df_StatDist['QBD']) ** 2).round(3)
 
@@ -279,18 +279,19 @@ def df_quantity_Compare_to_latex(df, queue_type):
             df_pivot = df_K.pivot(index="Quantity", columns="rho",
                                   values=["DNN", "QBD", "Simul", "S(2025)", "W(1993)"])
             value_order = ["DNN", "QBD", "Simul", "S(2025)", "W(1993)"]
-            
+    
         # Enforce row order
         quantity_order = ["$q_0$", "$\\mathbb{E}[q_w]$", "$\\mathbb{E}[W]$"]
         df_pivot = df_pivot.reindex(quantity_order)
     
         # Sort columns
-        df_pivot = df_pivot.sort_index(axis=1, level=1)
+        # df_pivot = df_pivot.sort_index(axis=1, level=1)
         
         # Note: The order of column names may change (it may not match the order specified in 'values'),
         # but each column name still correctly corresponds to its column values.
         
         # Extract methods and rhos
+        # methods = list(df_pivot.columns.levels[0])
         methods = value_order
         rhos = list(df_pivot.columns.levels[1])
     
@@ -299,21 +300,19 @@ def df_quantity_Compare_to_latex(df, queue_type):
             "\\begin{table}[H]\n"
             "\\centering\n"
             "\\tiny\n"
-            f"\\caption{{Queueing Quantity Comparison for $K$ = {K}; Queue Type: {queue_type.capitalize()}}}\n"
-            "\\begin{tabular}{l|" + "r" * len(methods) + "}\n"
+            f"\\caption{{Queueing quantity comparison for $K$ = {K}; {queue_type.capitalize()} time $PH/PH/{K}$ Queues}}\n"
+            "\\begin{tabular}{|l|" + "r" * len(methods) + "|}\n"
             "\\hline\n"
         )
-        print(methods)
+        
         # Loop through each rho block
         for i, rho in enumerate(rhos):
             df_block = df_pivot.xs(rho, axis=1, level=1)
-            
             # Reorder columns according to value_order
             df_block = df_block.reindex(columns=[c for c in value_order if c in df_block.columns])
-            print('block')
-            print(df_block)
+    
             # Add rho header
-            latex_table += f" & \\multicolumn{{{len(methods)}}}{{c}}{{$\\rho = {rho}$}}  \\\\\n"
+            latex_table += f" & \\multicolumn{{{len(methods)}}}{{c|}}{{$\\rho = {rho}$}}  \\\\\n"
             latex_table += " & " + " & ".join(methods) + "  \\\\\n"
             latex_table += "\\hline\n\n"
     
@@ -378,38 +377,34 @@ def Compare_Queue_quantity_batch(Rho_list, batch_size, epochs, DNN_model, K, que
                 SAE_DNN = np.abs(df_StatDist['QBD'] - df_StatDist['DNN']).sum() # summation over queue length
                 # SAE_whitt = np.abs(df_StatDist['QBD']- df_StatDist['W(1993)']).sum() # summation over queue length
                 SAE_simu = np.abs( df_StatDist['QBD'] - df_StatDist['Simulation']).sum()
-                if queue_type == 'continuous':
-                    SAE_Sherzer2025 = np.abs(df_StatDist['QBD'] - df_StatDist['S(2025)']).sum()
-                    if K == 1:
-                        SAE_Baron = np.abs(df_StatDist['QBD'] - df_StatDist['B(2024)']).sum()
+                SAE_Sherzer2025 = np.abs(df_StatDist['QBD'] - df_StatDist['S(2025)']).sum()
+                if queue_type == 'continuous' and K == 1:
+                    SAE_Baron = np.abs(df_StatDist['QBD'] - df_StatDist['B(2024)']).sum()
 
                 # Calculate REM for each prediction
                 REM_DNN = np.abs(np.dot(queue_list, (df_StatDist['QBD']) - df_StatDist['DNN'])) / np.dot(queue_list, df_StatDist['DNN'])
-                REM_whitt = np.abs(np.dot(queue_list, (df_StatDist['QBD']) - df_StatDist['W(1993)'])) / np.dot(queue_list, df_StatDist['W(1993)'])
+                # REM_whitt = np.abs(np.dot(queue_list, (df_StatDist['QBD']) - df_StatDist['W(1993)'])) / np.dot(queue_list, df_StatDist['W(1993)'])
                 REM_simu = np.abs(np.dot(queue_list, (df_StatDist['QBD']) - df_StatDist['Simulation'])) / np.dot(queue_list, df_StatDist['Simulation'])
-                if queue_type == 'continuous':
-                    REM_Sherzer2025 = np.abs(np.dot(queue_list, (df_StatDist['QBD']) - df_StatDist['S(2025)'])) / np.dot(queue_list, df_StatDist['S(2025)'])
-                    if K == 1:
-                        REM_Baron = np.abs(np.dot(queue_list, (df_StatDist['QBD']) - df_StatDist['B(2024)'])) / np.dot(queue_list, df_StatDist['B(2024)'])
+                REM_Sherzer2025 = np.abs(np.dot(queue_list, (df_StatDist['QBD']) - df_StatDist['S(2025)'])) / np.dot(queue_list, df_StatDist['S(2025)'])
+                if queue_type == 'continuous' and K == 1:
+                    REM_Baron = np.abs(np.dot(queue_list, (df_StatDist['QBD']) - df_StatDist['B(2024)'])) / np.dot(queue_list, df_StatDist['B(2024)'])
                 
                 df_sub = pd.DataFrame()
                 # SAE error
                 df_sub['SAE_DNN'] = [SAE_DNN]
                 df_sub['SAE_simu'] = [SAE_simu]
                 # df_sub['SAE_whitt'] = [SAE_whitt]
-                if queue_type == 'continuous':
-                    df_sub['SAE_Sherzer'] = [SAE_Sherzer2025]
-                    if K == 1:
-                        df_sub['SAE_Baron'] = [SAE_Baron]
+                df_sub['SAE_Sherzer'] = [SAE_Sherzer2025]          
+                if queue_type == 'continuous' and K == 1:
+                    df_sub['SAE_Baron'] = [SAE_Baron]
                 
                 # REM
                 df_sub['REM_DNN'] = [REM_DNN]
                 df_sub['REM_simu'] = [REM_simu]
-                df_sub['REM_whitt'] = [REM_whitt]
-                if queue_type == 'continuous':
-                    df_sub['REM_Sherzer'] = [REM_Sherzer2025]
-                    if K == 1:
-                        df_sub['REM_Baron'] = [REM_Baron]
+                # df_sub['REM_whitt'] = [REM_whitt]
+                df_sub['REM_Sherzer'] = [REM_Sherzer2025]
+                if queue_type == 'continuous' and K == 1:
+                    df_sub['REM_Baron'] = [REM_Baron]
                 
                 df_sub['sample_index'] = [i]
                 df_sub['queue_type'] = [queue_type]
@@ -489,8 +484,7 @@ def Compare_Queue_quantity_batch(Rho_list, batch_size, epochs, DNN_model, K, que
                 df_min = df_all_q.groupby(['epoch','K'])[['SAE_DNN', 'SAE_simu', 'SAE_Sherzer', 'REM_DNN', 'REM_simu', 'REM_Sherzer']].min()
                 df_mean = df_all_q.groupby(['epoch', 'K'])[['SAE_DNN', 'SAE_simu', 'SAE_Sherzer', 'REM_DNN', 'REM_simu', 'REM_Sherzer']].mean()
                 df_max = df_all_q.groupby(['epoch', 'K'])[['SAE_DNN', 'SAE_simu', 'SAE_Sherzer', 'REM_DNN', 'REM_simu', 'REM_Sherzer']].max()
-                
-                
+        
                 # Rename columns to indicate statistic
                 df_min = df_min.rename(columns={
                     'SAE_DNN': 'DNN_SAE_min',
@@ -525,40 +519,44 @@ def Compare_Queue_quantity_batch(Rho_list, batch_size, epochs, DNN_model, K, que
                     'REM_Sherzer': 'S(2025)_REM_max'
                 })
             
-            else: # exclude the Sherzer2025 and Baron2024 method
-                # First group by 'epoch' and calculate min, mean, max
+            else: # exclude Baron2024
                 # df_min = df_all_q.groupby(['epoch','K'])[['SAE_DNN', 'SAE_simu', 'SAE_whitt', 'REM_DNN', 'REM_simu', 'REM_whitt']].min()
                 # df_mean = df_all_q.groupby(['epoch', 'K'])[['SAE_DNN', 'SAE_simu', 'SAE_whitt', 'REM_DNN', 'REM_simu', 'REM_whitt']].mean()
                 # df_max = df_all_q.groupby(['epoch', 'K'])[['SAE_DNN', 'SAE_simu', 'SAE_whitt', 'REM_DNN', 'REM_simu', 'REM_whitt']].max()
-                df_min = df_all_q.groupby(['epoch','K'])[['SAE_DNN', 'SAE_simu',  'REM_DNN', 'REM_simu']].min()
-                df_mean = df_all_q.groupby(['epoch', 'K'])[['SAE_DNN', 'SAE_simu', 'REM_DNN', 'REM_simu']].mean()
-                df_max = df_all_q.groupby(['epoch', 'K'])[['SAE_DNN', 'SAE_simu',  'REM_DNN', 'REM_simu']].max()
+                df_min = df_all_q.groupby(['epoch','K'])[['SAE_DNN', 'SAE_simu',  'SAE_Sherzer', 'REM_DNN', 'REM_simu', 'REM_Sherzer']].min()
+                df_mean = df_all_q.groupby(['epoch', 'K'])[['SAE_DNN', 'SAE_simu', 'SAE_Sherzer', 'REM_DNN', 'REM_simu', 'REM_Sherzer']].mean()
+                df_max = df_all_q.groupby(['epoch', 'K'])[['SAE_DNN', 'SAE_simu',  'SAE_Sherzer', 'REM_DNN', 'REM_simu', 'REM_Sherzer']].max()
        
                 # Rename columns to indicate statistic
                 df_min = df_min.rename(columns={
                     'SAE_DNN': 'DNN_SAE_min',
                     'SAE_simu': 'Simul_SAE_min',
+                    'SAE_Sherzer': 'S(2025)_SAE_min',
                     # 'SAE_whitt': 'W(1993)_SAE_min',      
                     'REM_DNN': 'DNN_REM_min',
                     'REM_simu': 'Simul_REM_min',
+                    'REM_Sherzer': 'S(2025)_REM_min',
                     # 'REM_whitt':'W(1993)_REM_min'
                 })
-                
                 df_mean = df_mean.rename(columns={
                     'SAE_DNN': 'DNN_SAE_avg',
                     'SAE_simu': 'Simul_SAE_avg',
+                    'SAE_Sherzer': 'S(2025)_SAE_avg',                   
                     # 'SAE_whitt': 'W(1993)_SAE_avg',
                     'REM_DNN': 'DNN_REM_avg',
                     'REM_simu': 'Simul_REM_avg',
+                    'REM_Sherzer': 'S(2025)_REM_avg',
                     # 'REM_whitt':'W(1993)_REM_avg' 
                 })
                 
                 df_max = df_max.rename(columns={
                     'SAE_DNN': 'DNN_SAE_max',
                     'SAE_simu': 'Simul_SAE_max',
+                    'SAE_Sherzer': 'S(2025)_SAE_max',        
                     # 'SAE_whitt': 'W(1993)_SAE_max',
                     'REM_DNN': 'DNN_REM_max',
                     'REM_simu': 'Simul_REM_max',
+                    'REM_Sherzer': 'S(2025)_REM_max',
                     # 'REM_whitt':'W(1993)_REM_max'
                 })
             
@@ -602,14 +600,21 @@ def df_to_latex_queue_quantity_batch_table(df_k, K, queue_type, model_name="SAE"
 
     n_sub = len(subcols)
     groups = ["min", "avg", "max"]
+    
+    if queue_type == 'continuous' or queue_type == 1:
+        type_DNN = 'C'
+    elif queue_type == 'discrete' or queue_type == 0:
+        type_DNN = 'D'
+    else:
+        type_DNN = 'M'
 
     # ----- Header -----
     header = [
         r"\begin{table}[H]",
         r"\centering",
         r"\tiny",
-        rf"\caption{{{caption_prefix} for $K = {K}$; {queue_type} queues; $DNN_{{(C)}}^{{({K})}}$}}",
-        r"\begin{tabular}{c|" + "|".join(["c" * n_sub] * len(groups)).replace("c", "c") + "}",
+        rf"\caption{{{caption_prefix} for $K = {K}$; {queue_type} queues; $DNN_{({type_DNN})}^{{({K})}}$}}",
+        r"\begin{tabular}{|c|" + "|".join(["c" * n_sub] * len(groups)).replace("c", "c") + "|}",
         r"\hline",
     ]
 
@@ -785,9 +790,9 @@ def Out_space_samples(queue_type, K, m_max, n_max, Lmax, DNN_model, c_a_2_ubound
     df_StatDist.iloc[0:N,].plot(kind='bar', figsize=(10, 6), color = mycolor, rot=0)
     # Adding title and labels
     if mixed_type:
-        plt.title(f'Queue Length Distribution: $K$={K}, {queue_type.capitalize()} Queue, mixed DNN, SCVa={round(c_a_2,1)}, SCVs={round(c_s_2,1)}, $\\rho={round(rho,2)}$', fontsize=16) # $\rho$={round(rho,2)}', fontsize=16)
+        plt.title(f'Queue length distribution: $K$={K}, {queue_type.capitalize()} queue, mixed DNN, SCVa={round(c_a_2,1)}, SCVs={round(c_s_2,1)}, $\\rho={round(rho,2)}$', fontsize=16) # $\rho$={round(rho,2)}', fontsize=16)
     else:
-        plt.title(f'Queue Length Distribution: $K$={K}, {queue_type.capitalize()} Queue, {queue_type.capitalize()} DNN, SCVa={round(c_a_2,1)}, SCVs={round(c_s_2,1)}, $\\rho={round(rho,2)}$', fontsize=16)  #$\rho$={round(rho,2)}', fontsize=16)
+        plt.title(f'Queue length distribution: $K$={K}, {queue_type.capitalize()} queue, {queue_type.capitalize()} DNN, SCVa={round(c_a_2,1)}, SCVs={round(c_s_2,1)}, $\\rho={round(rho,2)}$', fontsize=16)  #$\rho$={round(rho,2)}', fontsize=16)
 
     plt.xlabel('Queue length', fontsize=14)
     plt.ylabel('Probability', fontsize=14)
@@ -883,15 +888,16 @@ def df_error_to_latex_table(df, queue_type, K):
     latex_table = latex_table.replace("\\toprule", "\\hline").replace("\\midrule", "").replace("\\bottomrule", "")
 
     # Define table caption and label
-    table_caption = f"Accuracy of Test Set: {queue_type.capitalize()}, $K$ = {K}"
+    table_caption = f"Error of test set: {queue_type.capitalize()}, $K$ = {K}"
     table_label = f"tab:error_metrics_{queue_type.replace(' ', '_')}_K_{K}"
 
     # Format the complete LaTeX table
     latex_code = (
-        "\\begin{table}[h]\n"
+        "\\begin{table}[H]\n"
         "\\centering\n"
+        "\\tiny\n"
         f"\\caption{{{table_caption}}}\n"
-        "\\begin{tabular}{lrrrrrr}\n"
+        "\\begin{tabular}{|l|rrrrrr|}\n"
         "\\hline\n"
         "Number & SAE\\_avg & SAE\\_min & SAE\\_max & REM\\_avg & REM\\_min & REM\\_max \\\\\n"
         "\\hline\n"

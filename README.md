@@ -24,6 +24,8 @@ The project provides Python implementations for training, sampling, and predicti
     ├── script_training.py      # Script for model training
     ├── script_prediction.py    # Script for prediction
     ├── script_sampling.py      # Script for sampling
+    ├── example_prediction.ipynb # Notebook demonstrating example predictions
+    ├── plot_skew_kurt.ipynb   # Notebook for plotting the skewness and Kurtosis of samples
     │
     ├── Training/               # Training-related modules
     ├── Sampling/               # Sampling-related modules

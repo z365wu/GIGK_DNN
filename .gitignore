@@ -20,7 +20,8 @@ env/
 # Ignore outputs
 scripts/Output/Figures/
 scripts/Output/Tables/
-scripts/Output/samples/
+scripts/Output/samples/continuous
+scripts/Output/samples/discrete
 #scripts/Output/models/
 scripts_He/
 

@@ -61,7 +61,7 @@ def Compare_StatDist(queue_type, K, m_max, n_max, Lmax, NN_model, rho_lower, rho
     Stationary distributions of a continuous/discrete time PH/PH/K queue #######
     i) QBD (exact); ii) Simulation; iii) NN prediction;  #######
     iv) Whitt1993; v) Baron2024 (only for a continuous queue with 1 server) #######
-    vi) Sherzer2025 (only for a continuous queue)
+    vi) Sherzer2025
     '''
     
     if queue_type == 0.5 or queue_type == 'mixed': 

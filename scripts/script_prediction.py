@@ -384,7 +384,7 @@ if __name__ == '__main__':
     
     ##### Parameters
     n_max = 10           # The highest order of moments
-    Lmax = 500           # The maximum queue length + 1 (The maxium queue length is 499)
+    Lmax = 500           # The maximum queue length + 1 (The maximum queue length is 499)
     m_max = 15          # The maximum order of PH-representation (alpha, T)
     input_dim = 2*n_max  # DNN input dimension: arrival n_max + service n_max
     Rho_list = [0.27, 0.66, 0.95]  # List of traffic intensities (ρ) used for prediction
@@ -401,7 +401,7 @@ if __name__ == '__main__':
     for queue_type in ['continuous', 'discrete', 0.5]:   # 'continuous', 'discrete', 0.5]:  # 0.5 is for the mixed case with 0.5*100% continous samples and (1 - 0.5) * 100% discrete samples
         print(f'queue type: {queue_type}')
         
-        # Class initilization and DNN training for ALL functions below ###########
+        # Class initialization and DNN training for ALL functions below ###########
         DNN_net = NN_for_Queue(
             queue_type=queue_type, n_max=n_max, Lmax=Lmax, m_max=m_max, input_dim=input_dim, num_classes=Lmax
         )

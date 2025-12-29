@@ -42,8 +42,13 @@ Additional plots include:
 	
 ### DNN prediction
 4. The code `script_prediction.py`    
-	4.1 Part I: Predictes the stationary distribution of queue length for a new sample, and compares the results with other methods..
-	4.2 Part II: Predictes the stationary distribution of queue length for a batch of new samples, and compares the results with other methods.
-	4.2 Part III: Predictes the stationary distribution of queue length for a new sample located inside or outside the SCV_a and SCV_s regions of the DNN training samples.
+	4.1 Part I: Predicts the stationary distribution of queue length for a new sample, and compares the results with other methods..
+	4.2 Part II: Predicts the stationary distribution of queue length for a batch of new samples, and compares the results with other methods.
+	4.3 Part III: Predicts the stationary distribution of queue length for a new sample located inside or outside the SCV_a and SCV_s regions of the DNN training samples.
 	4.4 Part IV: Performs cross-comparison among DNNs trained using continuous, discrete, and mixed sample types.
 
+### Examples of Prediction
+5. The notebook `example_prediction.ipynb`, demonstrating example predictions.
+
+### Notebook for Plotting the Skewness and Kurtosis of Samples
+6. The notebook `plot_skew_kurt.ipynb`, plotting the skewness and kurtosis of samples.

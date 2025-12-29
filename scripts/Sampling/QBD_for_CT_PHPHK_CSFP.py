@@ -12,6 +12,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.linalg import expm # Compute the matrix exponential
 import pickle
+np.seterr(all='ignore')
 
 
 # We use different ways to generate some specific PH-distributions: Erlang, continuous/discrete PHD. 

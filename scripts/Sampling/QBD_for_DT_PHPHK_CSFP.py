@@ -13,6 +13,7 @@ from numpy import random
 # import sympy as sp
 import copy
 import math
+np.seterr(all='ignore')
 
 # Generate discrete time PH-representation (alpha, T)
 # m: state number

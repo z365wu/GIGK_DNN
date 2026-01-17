@@ -26,3 +26,4 @@ scripts/Output/samples/discrete
 scripts_He/
 scripts/Output/samples/queue_length_sample/queue_length_sample-He-paper.zip
 scripts/.Rhistory
+scripts/plot_skew_kurt_all.ipynb

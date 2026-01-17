@@ -84,11 +84,15 @@ def Cross_comparison_of_DNNs(DNN_model, K, queue_type, m_max, n_max, Lmax, rho_l
     df_StatDist['Simulation'] = Simu_StatDist[:Lmax]
     # df_StatDist['Whitt1993'] = StatDistWhitt1993
     # mycolor = ['#1f77b4', '#bcbd22', '#7f7f7f', '#ff7f0e', '#2ca02c', '#d62728'] #['orange', 'green', 'grey', 'blue', 'yellow', 'red']
-    df_StatDist['Sherzer2025'] = GGC2025_dist
+    df_StatDist['S(2025)'] = GGC2025_dist
     mycolor = ['#1f77b4', '#bcbd22', '#7f7f7f', '#ff7f0e', '#2ca02c', '#d62728'] #['orange', 'green', 'grey', 'blue', 'yellow', 'red', 'purple']
     if queue_type == 'continuous' and K == 1: # using opher2024 method only when K = 1
-        df_StatDist['Baron2024'] = Opher2024_dist
+        df_StatDist['B(2024)'] = Opher2024_dist
         mycolor = ['#1f77b4', '#bcbd22', '#7f7f7f', '#ff7f0e', '#2ca02c', '#d62728', '#8c564b'] # ['orange', 'green', 'grey', 'blue', 'yellow', 'red', 'purple', 'brown']
+    
+    # save cross valdiation sample
+    df_StatDist.to_csv('Output/Tables/cross_validation_example_K{K}_{queue_type}_queue_{rho}.csv'， index=False)
+
     # Set figure size
     plt.figure(figsize=(10, 6))
     # Plotting the bar plot

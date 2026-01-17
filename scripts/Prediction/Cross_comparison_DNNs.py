@@ -91,7 +91,7 @@ def Cross_comparison_of_DNNs(DNN_model, K, queue_type, m_max, n_max, Lmax, rho_l
         mycolor = ['#1f77b4', '#bcbd22', '#7f7f7f', '#ff7f0e', '#2ca02c', '#d62728', '#8c564b'] # ['orange', 'green', 'grey', 'blue', 'yellow', 'red', 'purple', 'brown']
     
     # save cross valdiation sample
-    df_StatDist.to_csv('Output/Tables/cross_validation_example_K{K}_{queue_type}_queue_{rho}.csv'， index=False)
+    # df_StatDist.to_csv('Output/Tables/cross_validation_example_K{K}_{queue_type}_queue_{rho}.csv'，index=False)
 
     # Set figure size
     plt.figure(figsize=(10, 6))

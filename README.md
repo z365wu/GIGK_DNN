@@ -13,12 +13,35 @@ This repository contains the source code and scripts accompanying the paper:
 
 The project provides Python implementations for training, sampling, and prediction tasks, as well as reproducible workflows to generate results.
 
+
+## ⚠️ Local Execution Instructions
+
+This project is designed to run locally.
+
+### Required Repositories
+
+Please download the following repositories:
+
+- The **model repository** (this repository)
+- The dataset repository: `z365wu/GIGK_DNN`
+
+### Data Preparation
+
+After downloading the dataset repository, locate the folder:
+
+`Output/samples/`
+
+Copy all files inside this directory and paste them into the corresponding folder within the model repository:
+
+`Output/samples/`
+
+
 ---
 
 ## Repository Structure
 ```
 .
-├──scripts_outputs            # All Python scripts and outputs
+├──scripts            # All Python scripts and outputs
     ├── README.md               # Detailed instructions on running codes
     ├── script_main.py          # Main entry point for running the workflow
     ├── script_training.py      # Script for model training

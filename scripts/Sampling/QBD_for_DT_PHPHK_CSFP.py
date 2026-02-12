@@ -13,23 +13,72 @@ from numpy import random
 # import sympy as sp
 import copy
 import math
-np.seterr(all='ignore')
 
 # Generate discrete time PH-representation (alpha, T)
 # m: state number
-def  DTPH_Rep_generator(m):        
-    v_alpha = np.random.rand(m) 
-    v_alpha = v_alpha/v_alpha.sum()   # normalize alpha so that the sum of each element equals 1
-    # print(v_alpha.shape)
-    
-    m_T = np.random.rand(m, m + 1)    # The (m+1)-st column is for absorbtion probability
-    # Normalize each row so that the sum of each row equals 1
-    row_sums = m_T.sum(axis=1)
-    m_T_normalized = m_T / row_sums[:, np.newaxis]
-    # only keep the m * m generative matrix
-    m_T = m_T_normalized[:,:-1]
 
-    return  v_alpha, m_T     # Return (alpha, T)
+def  DTPH_Rep_generator(m):  
+    #### for Erlang and Coxian structure
+    v_alpha = np.zeros(m)  
+    m_T = np.zeros([m, m])  
+    tempp = random.random()  # For separating different types of PH-representations
+    if tempp < 0:  # T is not specially structured
+        ## No structure      
+        v_alpha = np.random.rand(m) 
+        v_alpha = v_alpha/v_alpha.sum()   # normalize alpha so that the sum of each element equals 1
+        # print(v_alpha.shape)
+        m_T_temp = np.random.rand(m, m + 1)    # The (m+1)-st column is for absorbtion probability
+        # Normalize each row so that the sum of each row equals 1
+        row_sums = m_T_temp.sum(axis=1) + np.random.rand(m)*m
+        m_T_normalized = m_T_temp / row_sums[:, np.newaxis]
+        # only keep the m * m generative matrix
+        m_T = m_T_normalized[:,:-1]
+    elif tempp < 0.75:   #  Erlang distribution: 25% of such distributions
+        # Vector alpha
+        v_alpha[0] = 1
+        # Matrix T
+        tempx = random.random() 
+        for i in range(0,m):
+            if i<m-1:
+                m_T[i,i] = tempx 
+                m_T[i,i+1] = 1 - m_T[i,i]
+            if i == m-1:
+                m_T[i,i] = tempx * 0.9 # ensure absorbtion rate bigger than 0.1
+    else:   # General Coxian distribution: 25% Coxian distributions
+        # Vector alpha
+        v_alpha[0] = random.random()
+        # Matrix T
+        on_diag_value = random.random()
+        for i in range(0,m):
+            # m_T[i,i] = on_diag_value # Diagonal elements (negative)
+            if i<m-1:
+                if random.random() > 0.2:  # Off-diagonal element (i, i+1); Make T from generalized Erlang to Coxian
+                    m_T[i,i] = on_diag_value
+                    m_T[i,i+1] = 1 - on_diag_value
+                else:
+                    v_alpha[i+1] = random.random()
+                    m_T[i,i] = on_diag_value * 0.9 # ensure absorbtion rate bigger than 0.1
+                    on_diag_value = random.random()  # The next diagonal element value
+            if i == m-1:
+                m_T[i,i] = on_diag_value * 0.9 # ensure absorbtion rate bigger than 0.1
+
+    v_alpha = v_alpha/np.sum(v_alpha)
+
+    return  v_alpha, m_T    # Return (alpha, T)
+
+# def  DTPH_Rep_generator(m):        
+#     v_alpha = np.random.rand(m) 
+#     v_alpha = v_alpha/v_alpha.sum()   # normalize alpha so that the sum of each element equals 1
+#     # print(v_alpha.shape)
+    
+#     m_T = np.random.rand(m, m + 1)    # The (m+1)-st column is for absorbtion probability
+#     # Normalize each row so that the sum of each row equals 1
+#     row_sums = m_T.sum(axis=1)
+#     m_T_normalized = m_T / row_sums[:, np.newaxis]
+#     # only keep the m * m generative matrix
+#     m_T = m_T_normalized[:,:-1]
+
+#     return  v_alpha, m_T     # Return (alpha, T)
 
 #####  discrete time PHD moments generator   ##### 
 #    PH-representation (alpha, T)
@@ -73,7 +122,7 @@ def  DTPHD_Moments(v_alpha, m_T, n_max):
             moment_n = moment_f_list[n] - sum([a * b for a, b in zip(v_moments.tolist(), coffe_list)])
             v_moments[n] = moment_n # Store the calculated moment
     
-    return v_moments # Return the first n_max momen
+    return v_moments # Return the first n_max moments
 
 
 ########## This function is for the construction of L+(k,m) ##############
@@ -472,11 +521,15 @@ def  Input_Output_Moments_Generator_Discrete(Sample_size, K, m_max, n_max, Lmax,
     
 
 ######### Test ###############################
-# K = 3
-# m_max = 10
-# n_max = 10
-#Lmax = 100
-#j = 0
-#Sample_size = 1
-#moments_Arrival_log, moments_Service_log, v_stationary, SCV_A, SCV_S, rho = Discrete_PH_PH_K(j, Sample_size, K, m_max, n_max, Lmax)
-#print(f'stationary queue length distribution: {v_stationary}')
+K = 3
+m_max = 10
+n_max = 10
+Lmax = 100
+j = 0
+Sample_size = 1
+moments_Arrival_log, moments_Service_log, v_stationary, SCV_A, SCV_S, rho, Iter_num = Discrete_PH_PH_K(j, Sample_size, K, m_max, n_max, Lmax)
+print(f'stationary queue length distribution: {v_stationary}')
+print(moments_Service_log)
+print(SCV_A, SCV_S)
+print('rho = ', rho)
+print(np.sum(v_stationary))
